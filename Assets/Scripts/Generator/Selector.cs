@@ -90,17 +90,19 @@ public abstract partial class RMS
 			}
 
 		/// <summary> Selects [count] regions amongst all the default regions that are the closest to the passed parameter. </summary>
-		public Selector closest(int count = 1) { return closest_amongst(rms.regions.all.except(this), count); }
+		public Selector closest(int count = 1) { return closest_amongst(rms.regions.all.except(this), false, count); }
 
 		/// <summary> Selects [count] regions amongst the selected cells that are the closest to the passed parameter. </summary>
-		public Selector closest_to(Selector to, int count = 1) { return to.closest_amongst(this, count); }
+		public Selector closest_to(Selector to, bool include_targets, int count = 1) { return to.closest_amongst(this, include_targets, count); }
 
 		/// <summary> Selects [count] regions amongst the passed parameter that are the closest to the selected regions. </summary>
-		public Selector closest_amongst(Selector amongst, int count = 1)
+		public Selector closest_amongst(Selector amongst, bool include_sources, int count = 1)
 			{
 			var ret = new HashSet<Cell>();
 
-			var candidates = (HashSet<Cell>)new Selector(amongst, rms).except(this);
+			var candidates_selector = new Selector(amongst, rms);
+			if (!include_sources) { candidates_selector = candidates_selector.except(this); }
+			var candidates =  (HashSet<Cell>)candidates_selector;
 
 			for (int i = 0; i < count; i++)
 				{
@@ -181,12 +183,12 @@ public abstract partial class RMS
 			return new Selector(ret, rms);
 			}
 
-		public Selector except          (Cell cell)                { return except          (new Selector(cell, rms)); }
-		public Selector include         (Cell cell)                { return include         (new Selector(cell, rms)); }
-		public Selector closest_to      (Cell cell, int count = 1) { return closest_to      (new Selector(cell, rms), count); }
-		public Selector closest_amongst (Cell cell, int count = 1) { return closest_amongst (new Selector(cell, rms), count); }
-		public Selector touching        (Cell cell)                { return touching        (new Selector(cell, rms)); }
-		public Selector containing      (Cell cell)                { return containing      (new Selector(cell, rms)); }
+		public Selector except          (Cell cell)                                      { return except          (new Selector(cell, rms)); }
+		public Selector include         (Cell cell)                                      { return include         (new Selector(cell, rms)); }
+		public Selector closest_to      (Cell cell, bool include_targets, int count = 1) { return closest_to      (new Selector(cell, rms), include_targets, count); }
+		public Selector closest_amongst (Cell cell, bool include_sources, int count = 1) { return closest_amongst (new Selector(cell, rms), include_sources, count); }
+		public Selector touching        (Cell cell)                                      { return touching        (new Selector(cell, rms)); }
+		public Selector containing      (Cell cell)                                      { return containing      (new Selector(cell, rms)); }
 
 		public bool is_empty { get { return selected.Count != 0; } }
 		public int  count    { get { return selected.Count; } }

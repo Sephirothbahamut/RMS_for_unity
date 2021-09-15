@@ -46,30 +46,30 @@ namespace utils.geometry
 		public bool is_on_right(Segment segment) { return new Polygon.Triangle(this, segment.a, segment.b).area2 <  0; }
 		public bool is_colinear(Segment segment) { return new Polygon.Triangle(this, segment.a, segment.b).area2 == 0; }
 
-		public static int compare_clockwise(Point center, Point a, Point b)
+		public static int compare_clockwise(Point centre, Point a, Point b)
 			{
 			//https://stackoverflow.com/questions/6989100/sort-points-in-clockwise-ordervar a = first.Start;
 
-			if (a.x - center.x >= 0 && b.x - center.x <  0) { return +1; }
-			if (a.x - center.x <  0 && b.x - center.x >= 0) { return -1; }
-			if (a.x - center.x == 0 && b.x - center.x == 0)
+			if (a.x - centre.x >= 0 && b.x - centre.x <  0) { return +1; }
+			if (a.x - centre.x <  0 && b.x - centre.x >= 0) { return -1; }
+			if (a.x - centre.x == 0 && b.x - centre.x == 0)
 				{
-				if (a.y - center.y >= 0 || b.y - center.y >= 0) { return a.y > b.y ? +1 : -1; }
+				if (a.y - centre.y >= 0 || b.y - centre.y >= 0) { return a.y > b.y ? +1 : -1; }
 				return b.y > a.y ? +1 : -1;
 				}
 
-			// compute the cross product of vectors (center -> a) x (center -> b)
-			double det = (a.x - center.x) * (b.y - center.y) - (b.x - center.x) * (a.y - center.y);
+			// compute the cross product of vectors (centre -> a) x (centre -> b)
+			double det = (a.x - centre.x) * (b.y - centre.y) - (b.x - centre.x) * (a.y - centre.y);
 			if (det < 0) { return +1; }
 			if (det > 0) { return -1; }
 
-			// points a and b are on the same line from the center
-			// check which point is closer to the center
-			double d1 = (a.x - center.x) * (a.x - center.x) + (a.y - center.y) * (a.y - center.y);
-			double d2 = (b.x - center.x) * (b.x - center.x) + (b.y - center.y) * (b.y - center.y);
+			// points a and b are on the same line from the centre
+			// check which point is closer to the centre
+			double d1 = (a.x - centre.x) * (a.x - centre.x) + (a.y - centre.y) * (a.y - centre.y);
+			double d2 = (b.x - centre.x) * (b.x - centre.x) + (b.y - centre.y) * (b.y - centre.y);
 			return d1 > d2 ? +1 : -1;
 			}
-		public static int compare_counterclockwise(Point center, Point a, Point b) { return compare_clockwise(center, b, a); }
+		public static int compare_counterclockwise(Point centre, Point a, Point b) { return compare_clockwise(centre, b, a); }
 
 		public float distance_to_line2(Segment line) { return line.perpendicular_segment_from(this).length2; }
 		public float distance_to_line (Segment line) { return line.perpendicular_segment_from(this).length; }

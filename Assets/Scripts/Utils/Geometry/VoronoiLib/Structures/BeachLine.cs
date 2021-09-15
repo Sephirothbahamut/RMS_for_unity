@@ -187,8 +187,8 @@ namespace VoronoiLib.Structures
                 //the breakpoint will dissapear if we add this site
                 //which means we will create an edge
                 //we treat this very similar to a circle event since
-                //an edge is finishing at the center of the circle
-                //created by circumscribing the left center and right
+                //an edge is finishing at the centre of the circle
+                //created by circumscribing the left centre and right
                 //sites
 
                 //bring a to the origin
@@ -360,7 +360,7 @@ namespace VoronoiLib.Structures
             // http://mathforum.org/library/drmath/view/55002.html
             // because every piece of this program needs to be demoed in maple >.<
 
-            //MATH HACKS: place center at origin and
+            //MATH HACKS: place centre at origin and
             //draw vectors a and c to
             //left and right respectively
             double bx = centerSite.X,
@@ -370,7 +370,7 @@ namespace VoronoiLib.Structures
                 cx = rightSite.X - bx,
                 cy = rightSite.Y - by;
 
-            //The center beach section can only dissapear when
+            //The centre beach section can only dissapear when
             //the angle between a and c is negative
             var d = ax*cy - ay*cx;
             if (d.ApproxGreaterThanOrEqualTo(0))
@@ -383,7 +383,7 @@ namespace VoronoiLib.Structures
 
             //add back offset
             var ycenter = y + by;
-            //y center is off
+            //y centre is off
             var circleEvent = new FortuneCircleEvent(
                 new VPoint(x + bx, ycenter + Math.Sqrt(x * x + y * y)),
                 ycenter, section

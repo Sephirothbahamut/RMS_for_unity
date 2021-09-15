@@ -10,8 +10,8 @@ namespace random_map_scripts
 
 	public class Islands : RMS
 		{
-		protected override int   tiles_width                  { get { return 200 + (20 * players_count); } }
-		protected override int   tiles_height                 { get { return 200 + (20 * players_count); } }
+		protected override int   tiles_width                  { get { return 150 + (30 * players_count); } }
+		protected override int   tiles_height                 { get { return 150 + (30 * players_count); } }
 		protected override float minimum_region_radius        { get { return 10; } }
 		protected override float minimum_player_starting_space{ get { return 50; } }
 
@@ -23,13 +23,13 @@ namespace random_map_scripts
 
 			foreach (var spawn in regions.spawn)
 				{
-				var start_resources_regions = regions.empty.closest_to(spawn, 5);
+				var start_resources_regions = regions.empty.closest_to(spawn, include_targets: false, 5);
 
-				populate(spawn).with("Town_center").center();
+				populate(spawn).with("Town_center").centre();
 
 				var forests = start_resources_regions.random(3);
 				populate(forests).with("Tree").radial();
-				paint(forests).with("Underbush").radial();
+				paint(forests).with("Underbrush").radial();
 
 				var gold = start_resources_regions.except(regions.filled).random();
 				populate(gold).with("Gold").grouped(6);
@@ -51,7 +51,7 @@ namespace random_map_scripts
 
 				var few_trees = shore.random(5);
 				populate(few_trees).with("Tree").radial(from_border: 0.3f);
-				paint(few_trees).with("Underbush").radial();
+				paint(few_trees).with("Underbrush").radial();
 
 				sea = sea.except(start_resources_regions).except(surroundings).except(shore);
 				}

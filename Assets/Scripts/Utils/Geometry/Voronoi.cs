@@ -34,7 +34,7 @@ namespace utils.geometry
 			{
 			for (int i = 0; i < vertices.Length; i++)
 				{
-				var triangle = new Polygon.Triangle(polygon.center, vertices[i], vertices[(i + 1) % vertices.Length]);
+				var triangle = new Polygon.Triangle(polygon.centre, vertices[i], vertices[(i + 1) % vertices.Length]);
 				if (triangle.contains(position)) { return triangle.proportional_distance(position, Polygon.Triangle.A); }
 				}
 			return float.NaN;

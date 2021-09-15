@@ -72,7 +72,7 @@ namespace utils.geometry
 				}
 			}
 
-		public Point center
+		public Point centre
 			{
 			get
 				{

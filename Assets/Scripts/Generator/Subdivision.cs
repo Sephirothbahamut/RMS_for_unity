@@ -95,8 +95,8 @@ public abstract partial class RMS
 			var points = new List<Point>();
 			foreach (var sample in sampler.Samples()) { points.emplace(bounding_box.x + sample.x, bounding_box.y + sample.y); }
 
-			// Select reference points as spawns in clockwise from center of map
-			var center = (Vector2)((Polygon)bounding_box).center;
+			// Select reference points as spawns in clockwise from centre of map
+			var centre = (Vector2)((Polygon)bounding_box).centre;
 			var reference_spawn_points = new List<Point>(players_count);
 
 			var starting_angle = Random.Range(0f, 360f);
@@ -106,7 +106,7 @@ public abstract partial class RMS
 			var angle = starting_angle;
 			for (int i = 0; i < players_count; i++, angle += degrees_between_spawns)
 				{
-				reference_spawn_points.Add(center + (EVector2.from_deg(angle) * dist_from_center));
+				reference_spawn_points.Add(centre + (EVector2.from_deg(angle) * dist_from_center));
 				}
 
 			// Select the closest poisson points

@@ -12,7 +12,7 @@ public abstract partial class RMS
 	public abstract partial class Modifier
 		{
 
-		public void center() { foreach (var cell in regions) { action(ref rms.tile_at(cell.point)); } }
+		public void centre() { foreach (var cell in regions) { action(ref rms.tile_at(cell.point)); } }
 
 		public void grouped(uint amount)
 			{

@@ -32,21 +32,21 @@ public abstract partial class RMS
 		/// 
 		/// </summary>
 		/// <param name="ease_style">The easing function used</param>
-		/// <param name="from_center">How much distant (normalized between 0-1) from the center will the easing function be used. From center to this distance the value will be constant at inner_weight.</param>
+		/// <param name="from_centre">How much distant (normalized between 0-1) from the centre will the easing function be used. From centre to this distance the value will be constant at inner_weight.</param>
 		/// <param name="from_border">How much distant (normalized between 0-1) from the border will the easing function be used. From border to this distance the value will be constant at outer_weight.</param>
-		/// <param name="inner_weight">The value between the center and from_center, and at the inner side of the easing function.</param>
+		/// <param name="inner_weight">The value between the centre and from_centre, and at the inner side of the easing function.</param>
 		/// <param name="outer_weight">The value between the border and from_border, and at the outer side of the easing function.</param>
-		public void radial(EaseStyle ease_style = EaseStyle.LinearEaseInOut, float from_center = 0f, float from_border = 0f, float inner_weight = 1f, float outer_weight = 0f)
+		public void radial(EaseStyle ease_style = EaseStyle.LinearEaseInOut, float from_centre = 0f, float from_border = 0f, float inner_weight = 1f, float outer_weight = 0f)
 			{
 			_foreach_tile((ref map_gen.Tile tile, Cell cell) =>
 			{
 				var dist = cell.proportional_distance(tile.center_position);
 				float weight = 0f;
-				if (dist <= from_center) { weight = inner_weight; }
+				if (dist <= from_centre) { weight = inner_weight; }
 				else if (1f - dist <= from_border) { weight = outer_weight; }
 				else
 					{
-					dist = utils.math.map(dist, from_center, 1f - from_border, 0f, 1f);
+					dist = utils.math.map(dist, from_centre, 1f - from_border, 0f, 1f);
 					weight = EaseMethods.GetEase(ease_style)(dist, inner_weight, outer_weight - inner_weight, 1f); 
 					}
 

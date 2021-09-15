@@ -25,18 +25,18 @@ namespace random_map_scripts
 
 			foreach (var spawn in regions.spawn)
 				{
-				var start_resources_regions = regions.empty.closest_to(spawn, 5);
+				var start_resources_regions = regions.empty.closest_to(spawn, include_targets: false, 5);
 
 				// Create a large hill on the spawn
 				var hill = hills_layer.all.touching(start_resources_regions.include(spawn));
 				rise(hill).by(5).all();
 				risen_hills = risen_hills.include(hill);
 
-				populate(spawn).with("Town_center").center();
+				populate(spawn).with("Town_center").centre();
 
 				var forests = start_resources_regions.random(3);
 				populate(forests).with("Tree").radial(from_border: 0.5f);
-				paint(forests).with("Underbush").radial();
+				paint(forests).with("Underbrush").radial();
 
 				var gold = start_resources_regions.except(regions.filled).random();
 				populate(gold).with("Gold").grouped(6);
@@ -51,16 +51,16 @@ namespace random_map_scripts
 			remaining = remaining.except(excluded.adjacent());
 
 			var relics = remaining.random(players_count * 2);
-			populate(relics).with("Relic").center();
+			populate(relics).with("Relic").centre();
 			remaining = remaining.except(relics);
 
 			var sparse_forests = remaining.random(remaining.count / 4);
 			populate(sparse_forests).with("Tree").radial(EaseStyle.Linear);
-			paint(sparse_forests).with("Underbush").radial();
+			paint(sparse_forests).with("Underbrush").radial();
 			remaining = remaining.except(sparse_forests);
 
 			var sparse_hills = hills_layer.all.except(risen_hills).except(risen_hills.adjacent());
-			rise(sparse_hills).by(4).radial(EaseStyle.LinearEaseInOut, from_center: 0.1f);
+			rise(sparse_hills).by(4).radial(EaseStyle.LinearEaseInOut, from_centre: 0.1f);
 
 			smooth(4);
 

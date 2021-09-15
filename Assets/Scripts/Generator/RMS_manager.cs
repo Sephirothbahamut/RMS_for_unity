@@ -21,6 +21,8 @@ public abstract partial class RMS
 		[Header("These fields should be consistent across the game, not depending on the individual map")]
 		[SerializeField]
 		public float tile_size = 1f;
+		[SerializeField, Range(2, 8)]
+		public int players_count = 2;
 
 		[ClassExtends(typeof(RMS))]
 		public ClassTypeReference script = null;
@@ -28,8 +30,9 @@ public abstract partial class RMS
 		//Just for editor testing
 		RMS instance = null;
 
+
 		[EasyButtons.Button]
-		public void generate(int players_count)
+		public void generate()
 			{
 			//var
 			instance = utils.construct.type<RMS>(script);

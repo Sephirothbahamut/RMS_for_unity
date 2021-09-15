@@ -34,9 +34,9 @@ namespace map_gen
 			(this.matrix_x, this.matrix_y, this.map, height, uv,         objects,                assigned) = 
 			(matrix_x,      matrix_y,      map,      0f,     new Rect(), new List<GameObject>(), false);
 
-		public GameObject instantiate(GameObject prefab, bool center = true)
+		public GameObject instantiate(GameObject prefab, bool centre = true)
 			{
-			var spawn_position = center ? center_position : position;
+			var spawn_position = centre ? center_position : position;
 			var obj = GameObject.Instantiate(prefab, spawn_position.to_vector3(height), Quaternion.identity, map.parent);
 			obj.name = prefab.name;
 			objects.Add(obj);
